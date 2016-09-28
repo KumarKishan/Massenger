@@ -28,7 +28,8 @@ public class MessageResource {
      @GET           //Defines If This Class IS Called Which Method Is Invoked 
      @Produces(MediaType.APPLICATION_XML)    //Type Of Page IS Defined Using Produces Notation.
      public List<Message> getMessages() {
-          return MessageService.getAllMessage();
+          MessageService MS = new MessageService();
+          return MS.getAllMessage();
      }
 }
 
