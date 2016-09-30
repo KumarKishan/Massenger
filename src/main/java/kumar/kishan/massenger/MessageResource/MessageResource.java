@@ -13,6 +13,7 @@ package kumar.kishan.massenger.MessageResource;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import kumar.kishan.massenger.Service.MessageService;
@@ -25,11 +26,30 @@ import kumar.kishan.massenger.model.Message;
 @Path("/messages")       //Defines The Class Which is Searched By Jersey in Package and Its SubPackage
 public class MessageResource {
 
+     MessageService MS = new MessageService();
+
      @GET           //Defines If This Class IS Called Which Method Is Invoked 
      @Produces(MediaType.APPLICATION_XML)    //Type Of Page IS Defined Using Produces Notation.
      public List<Message> getMessages() {
-          MessageService MS = new MessageService();
+
           return MS.getAllMessage();
+     }
+
+     /**
+      *
+      * @param <error>
+      * @param <error>
+      * @param messageId
+      * @return
+      */
+     @GET
+     @Path("/{messageId}")
+     @Produces(MediaType.APPLICATION_XML)
+     public Message getMessage(@PathParam("messageId") long messageId) {
+          System.out.println("The Value We Get Is " + messageId);
+          System.out.println("The Data We Get Is " + MS.getMessage(messageId));
+          return MS.getMessage(messageId);
+
      }
 }
 
